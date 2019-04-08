@@ -13,5 +13,7 @@ app.use(express.static('public'));
 var io = socket(server);
 
 io.on('connection', function(socket){
-    console.log('someone access the chat');
+    socket.on('send_message', function(data){
+        io.sockets.emit('message_received', data);
+    });
 });
